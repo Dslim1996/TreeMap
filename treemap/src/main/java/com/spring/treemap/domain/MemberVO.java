@@ -13,9 +13,9 @@ public class MemberVO {
 	private String userEmail;
 	private String userName;
 	private String userPW;
-	
-	private char isDeleted;
-	private Date createdAt;
-	
+	private String phoneNum;
+	private String birthday;
+	private Date createdAt;	
+	private Date modDate;	
 	private List<AuthVO> authList;
 }

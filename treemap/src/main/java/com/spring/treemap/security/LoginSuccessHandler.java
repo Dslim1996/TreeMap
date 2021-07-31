@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -33,6 +35,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		log.info("roleName: "+roleNames);
 		if(roleNames.contains("ROLE_MEMBER")) {
 			response.sendRedirect("/treeMap/userMapBoard?userEmail="+user.getUsername());
+		}else if(roleNames.contains("ROLE_DELETED")) {
+			request.setAttribute("loginFailMsg", "탈퇴한 회원입니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/treeMap/map");
+			dispatcher.forward(request, response);
+			throw new DisabledException("탈외한 회원입니다.");
 		}
 
 	}

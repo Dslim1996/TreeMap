@@ -21,10 +21,10 @@
 		<!-- right-header -->
 		<%@ include file="../include/mapNav.jsp"%>
 		<!-- right-body -->
-		<% String subpage = "../include/mapboard"; %>
-		<!-- role이 없는 경우(로그인 안한경우) -->
-		<sec:authorize access="isAnonymous()">
-		<% subpage ="../member/customLogin"; %>
+		<% String subpage = "../member/customLogin"; %>
+		<!-- role이 없는 경우(로그인 한경우) -->
+		<sec:authorize access="isAuthenticated()">
+		<% subpage =  "../include/mapboard";%>
 		</sec:authorize>
 		<%	
 		if (request.getParameter("subpage") != null) {
@@ -670,8 +670,8 @@
 				});
 			} 
 		 function signup(){
-			 document.querySelector('#loginBtn').style="border:1px solid rgb(70, 220, 120); color: rgb(70, 220, 120) ";
-			 document.querySelector('#signupBtn').style="border:1px solid white; color: white ";
+			 document.querySelector('#loginBtn').style="border:1px solid rgb(70, 220, 120); color: rgb(70, 220, 120)";
+			 document.querySelector('#signupBtn').style="border:1px solid white; color: white";
 			 $.ajax({
 				    type : "GET",
 				    url : "/member/signup",

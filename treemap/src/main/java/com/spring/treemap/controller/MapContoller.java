@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,7 +33,7 @@ public class MapContoller {
 	MapService service;
 
 	// 처음 들어올시
-	@GetMapping("/map")
+	@RequestMapping(value = "/map", method= {RequestMethod.GET, RequestMethod.POST})
 	public String openMap(Model model, @RequestParam(value="num", required = false, defaultValue = "1") int num,
 			@RequestParam(value = "catNum", required = false, defaultValue = "1") int catNum,
 			@RequestParam(value = "searchType", required = false, defaultValue = "") String searchType,
